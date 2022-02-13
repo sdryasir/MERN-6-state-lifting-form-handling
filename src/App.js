@@ -1,23 +1,73 @@
-import logo from './logo.svg';
+import { useState } from 'react';
 import './App.css';
+import Form from './components/Form';
 
 function App() {
+
+  const [title, setTitle] = useState('');
+  const [description, setDescription] = useState('');
+
+  const handleTitle = (e) => {
+    setTitle(e.target.value);
+  }
+
+  const handleDescription = (e) => {
+    setDescription(e.target.value);
+  }
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(title, description);
+  }
+
+
+
+
+  const [persons, setPersons] = useState([
+    {
+      name: 'yasir',
+      age: 32
+    },
+    {
+      name: 'Ahmed',
+      age: 24
+    },
+    {
+      name: 'Obaid',
+      age: 25
+    }
+  ])
+
+
+  const addNewPerson = () => {
+    const per = {
+      name: 'Faraz',
+      age: 19
+    }
+    setPersons([...persons, per])
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      {/* <Form
+        handleTitle={handleTitle}
+        handleDescription={handleDescription}
+        handleSubmit={handleSubmit}
+        title={title}
+        description={description}
+      /> */}
+
+      {
+        persons.map(person => {
+          return (
+            <>
+              <p>{person.name}</p>
+              <p>{person.age}</p>
+            </>
+          )
+        })
+      }
+      <button onClick={addNewPerson}>Add New </button>
     </div>
   );
 }
