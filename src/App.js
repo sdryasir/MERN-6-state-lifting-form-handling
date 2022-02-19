@@ -1,73 +1,33 @@
 import { useState } from 'react';
 import './App.css';
-import Form from './components/Form';
+import Home from './pages/Home'
+import Locator from './pages/Locator'
+import Contact from './pages/Contact'
+import Register from './pages/Register'
+import Login from './pages/Login'
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import Navbar from './components/Navbar';
 
 function App() {
-
-  const [title, setTitle] = useState('');
-  const [description, setDescription] = useState('');
-
-  const handleTitle = (e) => {
-    setTitle(e.target.value);
-  }
-
-  const handleDescription = (e) => {
-    setDescription(e.target.value);
-  }
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log(title, description);
-  }
-
-
-
-
-  const [persons, setPersons] = useState([
-    {
-      name: 'yasir',
-      age: 32
-    },
-    {
-      name: 'Ahmed',
-      age: 24
-    },
-    {
-      name: 'Obaid',
-      age: 25
-    }
-  ])
-
-
-  const addNewPerson = () => {
-    const per = {
-      name: 'Faraz',
-      age: 19
-    }
-    setPersons([...persons, per])
-  }
-
   return (
     <div className="App">
-      {/* <Form
-        handleTitle={handleTitle}
-        handleDescription={handleDescription}
-        handleSubmit={handleSubmit}
-        title={title}
-        description={description}
-      /> */}
 
-      {
-        persons.map(person => {
-          return (
-            <>
-              <p>{person.name}</p>
-              <p>{person.age}</p>
-            </>
-          )
-        })
-      }
-      <button onClick={addNewPerson}>Add New </button>
+      <Router>
+        <Navbar />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/locator" element={<Locator />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/login" element={<Login />} />
+        </Routes>
+      </Router>
+
+      {/* <Home />
+      <Locator />
+      <Contact />
+      <Register />
+      <Login /> */}
     </div>
   );
 }
